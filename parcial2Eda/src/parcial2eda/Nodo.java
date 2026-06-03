@@ -49,6 +49,6 @@ public class Nodo {
     
     @Override
     public String toString() {
-        return "Partido" + "\nParticipante 1: " + participante1 + "\nParticipante2: " + participante2 + "\n Ganador: " + ganador + "\nResultado: " + resultado + "\nResultado anterior participante 1: " + izq + "\nResultado anterior participante 2: " + der;
+        return "Partido" + "\nParticipante 1: " + participante1 + "\nParticipante2: " + participante2 + "\n Ganador: " + ganador + "\nResultado: " + resultado + "\nResultado anterior participante 1: " + izq + "\nResultado anterior participante 2: " + der + "\n";
     }
 }
