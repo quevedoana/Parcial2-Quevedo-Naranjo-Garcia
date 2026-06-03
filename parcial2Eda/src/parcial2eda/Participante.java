@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package parcial2eda;
 
 /**
@@ -11,4 +6,18 @@ package parcial2eda;
  */
 public class Participante {
     
+    private String nombre_completo;
+    private String nacionalidad;
+    private int ranking;
+    
+    public Participante(String nombre, String nacion, int rank) {
+        nombre_completo = nombre;
+        nacionalidad = nacion;
+        ranking = rank;
+    }
+
+    @Override
+    public String toString() {
+        return "Participante: " + "\nNombre: " + nombre_completo + "\nNacionalidad: " + nacionalidad + "\nRanking: " + ranking;
+    }
 }

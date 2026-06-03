@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package parcial2eda;
 
 /**
@@ -10,5 +5,26 @@ package parcial2eda;
  * @author Anitabonita
  */
 public class Nodo {
+
+    private Participante participante1; 
+    private Participante participante2; 
+    private Participante ganador; // el ganador que sube de ronda
+    private String resultado; // el resultado que luego el usuario los setea en el menu
+    private Nodo izq; // apunta a la ronda de donde salio el p1
+    private Nodo der; // apunta a la ronda de donde salio el p2
+    // nodo izq y der apuntan a null si son hojas, seria el comienzo del torneo
+
+    public Nodo(Participante p1, Participante p2) {
+        participante1 = p1;
+        participante2 = p2;
+        ganador = null;
+        resultado = null;
+        izq = null;
+        der = null;
+    }
     
+    @Override
+    public String toString() {
+        return "Partido" + "\nParticipante 1: " + participante1 + "\nParticipante2: " + participante2 + "\n Ganador: " + ganador + "\nResultado: " + resultado + "\nResultado anterior participante 1: " + izq + "\nResultado anterior participante 2: " + der;
+    }
 }
