@@ -154,5 +154,28 @@ public class Arbol {
     public Nodo getRaiz() {
         return raiz;
     }
-
+    
+    private void siguienteFasePrivado(Nodo n){
+        if(n == null){
+            return;
+        }
+        siguienteFasePrivado(n.getIzq());
+        siguienteFasePrivado(n.getDer());
+        
+        if(!n.esHoja()){
+            Nodo izq =n.getIzq();
+            Nodo der= n.getDer();
+            
+            if(izq.getGanador()!=null && der.getGanador()!=null){
+                n.setParticipante1(izq.getGanador());
+                n.setParticipante2(der.getGanador());
+            }
+        }
+        
+    }
+    
+    public void siguienteFase(){
+        siguienteFasePrivado(raiz);
+    }
+    
 }

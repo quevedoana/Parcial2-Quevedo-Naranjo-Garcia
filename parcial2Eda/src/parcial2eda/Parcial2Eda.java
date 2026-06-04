@@ -41,7 +41,7 @@ public class Parcial2Eda {
                     }
                     torneo.crear_torneo(cant_jugadores);
                     torneoCreado = true;
-                    System.out.println("Torneo creado para "+ cant_jugadores + " jugadores");
+                    System.out.println("Torneo creado para " + cant_jugadores + " jugadores");
                     break;
                 case 2:
                     int i = lista_jugadores.size() + 1;
@@ -61,15 +61,15 @@ public class Parcial2Eda {
                         lista_jugadores.add(new Participante(nombre_jugador, nacionalidad_jugador, ranking_jugador));
                         i++;
                     }
-                    
+
                     System.out.println("Los jugadores han sido inscriptos");
                     break;
                 case 3:
-                    if(!torneoCreado){
+                    if (!torneoCreado) {
                         System.out.println("Primero cree el troneo (opcion 1)");
                         break;
                     }
-                    if(lista_jugadores.size() < cant_jugadores){
+                    if (lista_jugadores.size() < cant_jugadores) {
                         System.out.println("Faltan cargar jugadores: "
                                 + lista_jugadores.size() + " de " + cant_jugadores
                                 + " ingresados (opcion 2)");
@@ -77,11 +77,11 @@ public class Parcial2Eda {
                     }
                     Collections.sort(lista_jugadores);  //ordenamos los jugadores por menor a mayor por ranking
                     boolean crearRueda = torneo.armarPrimeraRueda(lista_jugadores);
-                    if(crearRueda){
+                    if (crearRueda) {
                         torneo.mostrarPrimeraRonda();
                     }
                     break;
-                  
+
             }
         } while (opcion != 6);
     }
