@@ -143,8 +143,8 @@ public class Arbol {
             System.out.println("Todavia no se armo la ronda");
             return;
         }
-       
-        System.out.println("          CRUCES");        
+
+        System.out.println("          CRUCES");
         for (int i = 0; i < hojas.size(); i++) {
             System.out.printf("  Partido %2d: %s%n", i + 1, hojas.get(i));
         }
@@ -154,28 +154,102 @@ public class Arbol {
     public Nodo getRaiz() {
         return raiz;
     }
-    
-    private void siguienteFasePrivado(Nodo n){
-        if(n == null){
+
+
+    private void siguienteFasePrivado(Nodo n) {
+        if (n == null) {
             return;
         }
         siguienteFasePrivado(n.getIzq());
         siguienteFasePrivado(n.getDer());
-        
-        if(!n.esHoja()){
-            Nodo izq =n.getIzq();
-            Nodo der= n.getDer();
-            
-            if(izq.getGanador()!=null && der.getGanador()!=null){
+
+        if (!n.esHoja()) {
+            Nodo izq = n.getIzq();
+            Nodo der = n.getDer();
+
+            if (izq.getGanador() != null && der.getGanador() != null) {
                 n.setParticipante1(izq.getGanador());
                 n.setParticipante2(der.getGanador());
             }
         }
-        
+
     }
-    
-    public void siguienteFase(){
+
+    public void siguienteFase() {
         siguienteFasePrivado(raiz);
     }
-    
+
+    public void cargarResultado(Nodo partido, int ganador) {
+        partido.setGanador(ganador == 1 ? partido.getParticipante1() : partido.getParticipante2());
+    }
+
+    public void mostrarResultado() {
+        mostrarResultadoPrivado(raiz);
+    }
+
+    private void mostrarResultadoPrivado(Nodo n) {
+        if (n == null) {
+            return;
+        }
+
+        mostrarResultadoPrivado(n.getIzq());
+        mostrarResultadoPrivado(n.getDer());
+
+        if (n.getGanador() != null) {
+            System.out.println(n);
+        }
+    }
+
+    public void mostrarSiguienteFase() {
+        mostrarSiguienteFasePrivado(raiz);
+    }
+
+    private void mostrarSiguienteFasePrivado(Nodo n) {
+
+        if (n == null) {
+            return;
+        }
+
+        if (!n.esHoja()
+                && n.getParticipante1() != null
+                && n.getParticipante2() != null
+                && n.getGanador() == null) {
+
+            System.out.println(n);
+        }
+
+        mostrarSiguienteFasePrivado(n.getIzq());
+        mostrarSiguienteFasePrivado(n.getDer());
+    }
+
+    public List<Nodo> obtenerPartidosPendientes() {
+        List<Nodo> partidos = new ArrayList<>();
+        obtenerPartidosPendientesPrivado(raiz, partidos);
+        return partidos;
+    }
+
+    private void obtenerPartidosPendientesPrivado(Nodo n, List<Nodo> partidos) {
+
+        if (n == null) {
+            return;
+        }
+
+        obtenerPartidosPendientesPrivado(n.getIzq(), partidos);
+        obtenerPartidosPendientesPrivado(n.getDer(), partidos);
+
+        if (n.getParticipante1() != null
+                && n.getParticipante2() != null
+                && n.getGanador() == null) {
+
+            partidos.add(n);
+        }
+    }
+
+    public Participante obtenerCampeon() {
+        if (raiz != null) {
+            return raiz.getGanador();
+        }
+        return null;
+    }
+
 }

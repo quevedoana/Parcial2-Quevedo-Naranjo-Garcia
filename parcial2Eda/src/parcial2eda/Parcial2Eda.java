@@ -15,6 +15,7 @@ public class Parcial2Eda {
         Scanner sc = new Scanner(System.in);
         Arbol torneo = new Arbol();
         List<Participante> lista_jugadores = new ArrayList<>();
+        Nodo partido = new Nodo();
 
         int cant_jugadores = 0;
         String nombre_jugador;
@@ -28,6 +29,9 @@ public class Parcial2Eda {
             System.out.println("1. Ingresar cantidad de jugadores");
             System.out.println("2. Ingresar jugadores inscriptos");
             System.out.println("3. Armar primera rueda del troneo");
+            System.out.println("4. Cargar resultados de las fases");
+            System.out.println("5. Mostrar resultados de las fases");
+            System.out.println("6. Mostrar campeón");
             System.out.println("6. Salir");
             opcion = sc.nextInt();
             sc.nextLine();
@@ -81,9 +85,63 @@ public class Parcial2Eda {
                         torneo.mostrarPrimeraRonda();
                     }
                     break;
+                case 4:
 
+                    List<Nodo> partidos = torneo.obtenerPartidosPendientes();
+
+                    for (int j = 0; j < partidos.size(); j++) {
+
+                        Nodo partidoActual = partidos.get(j);
+
+                        System.out.println("\nPartido " + (j + 1));
+                        System.out.println("1 - " + partidoActual.getParticipante1().getNombre_completo());
+                        System.out.println("2 - " + partidoActual.getParticipante2().getNombre_completo());
+
+                        int opcGanador;
+
+                        do {
+                            System.out.print("Ingrese ganador (1 o 2): ");
+                            opcGanador = sc.nextInt();
+                        } while (opcGanador != 1 && opcGanador != 2);
+
+                        torneo.cargarResultado(partidoActual, opcGanador);
+                    }
+
+                    torneo.siguienteFase();
+
+                    System.out.println("Resultados cargados correctamente.");
+                    torneo.siguienteFase();
+
+                    System.out.println("\nSIGUIENTE FASE");
+                    torneo.mostrarSiguienteFase();
+
+                    if (partidos.isEmpty()) {
+                        System.out.println("El torneo ya finalizo");
+                        break;
+                    }
+
+                    break;
+                case 5:
+                    System.out.println("=== RESULTADOS DEL TORNEO ===");
+                    torneo.mostrarResultado();
+
+                    break;
+                case 6:
+
+                    Participante campeon = torneo.obtenerCampeon();
+
+                    if (campeon == null) {
+                        System.out.println("El torneo aun no ha finalizado");
+                    } else {
+                        System.out.println("\n=== CAMPEON DEL TORNEO ===");
+                        System.out.println("Nombre: " + campeon.getNombre_completo());
+                        System.out.println("Nacionalidad: " + campeon.getNacionalidad());
+                        System.out.println("Ranking: " + campeon.getRanking());
+                    }
+
+                    break;
             }
-        } while (opcion != 6);
+        } while (opcion != 7);
     }
 
 }
