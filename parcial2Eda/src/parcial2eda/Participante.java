@@ -4,7 +4,7 @@ package parcial2eda;
  *
  * @author Anitabonita
  */
-public class Participante {
+public class Participante implements Comparable<Participante>{
     
     private String nombre_completo;
     private String nacionalidad;
@@ -43,5 +43,8 @@ public class Participante {
     @Override
     public String toString() {
         return "Participante: " + "\nNombre: " + nombre_completo + "\nNacionalidad: " + nacionalidad + "\nRanking: " + ranking;
+    }
+    public int compareTo(Participante otro) {
+        return Integer.compare(this.ranking, otro.ranking);
     }
 }
