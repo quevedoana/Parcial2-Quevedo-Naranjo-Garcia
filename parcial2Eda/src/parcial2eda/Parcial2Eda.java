@@ -14,13 +14,13 @@ public class Parcial2Eda {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Arbol torneo = new Arbol();
-        List<Participante> lista_jugadores = new ArrayList<>();
+        List<Participante> listaJugadores = new ArrayList<>();
         Nodo partido = new Nodo();
 
-        int cant_jugadores = 0;
-        String nombre_jugador;
-        int ranking_jugador;
-        String nacionalidad_jugador = null;
+        int cantJugadores = 0;
+        String nombreJugador;
+        int rankingJugador;
+        String nacionalidadJugador = null;
         boolean torneoCreado = false;
         int opcion;
 
@@ -38,31 +38,31 @@ public class Parcial2Eda {
             switch (opcion) {
                 case 1:
                     System.out.println("Ingrese la cantidad de jugadores para el torneo:");
-                    cant_jugadores = sc.nextInt();
-                    while (!torneo.cant_participantes(cant_jugadores)) {
+                    cantJugadores = sc.nextInt();
+                    while (!torneo.cantParticipantes(cantJugadores)) {
                         System.out.println("La cantidad de jugadores ingresada no es valida. Ingrese nuevamente:");
-                        cant_jugadores = sc.nextInt();
+                        cantJugadores = sc.nextInt();
                     }
-                    torneo.crear_torneo(cant_jugadores);
+                    torneo.crearTorneo(cantJugadores);
                     torneoCreado = true;
-                    System.out.println("Torneo creado para " + cant_jugadores + " jugadores");
+                    System.out.println("Torneo creado para " + cantJugadores + " jugadores");
                     break;
                 case 2:
-                    int i = lista_jugadores.size() + 1;
-                    if (cant_jugadores == 0) {
+                    int i = listaJugadores.size() + 1;
+                    if (cantJugadores == 0) {
                         System.out.println("Tiene que indicar primero la cantidad de jugadores participantes del torneo");
                         break;
                     }
-                    while (i <= cant_jugadores) {
+                    while (i <= cantJugadores) {
                         System.out.println("/// Jugador nro " + i + " ///");
                         System.out.println("Ingrese el nombre completo del jugador: ");
-                        nombre_jugador = sc.nextLine();
+                        nombreJugador = sc.nextLine();
                         System.out.println("Su nacionalidad: ");
-                        nacionalidad_jugador = sc.nextLine();
+                        nacionalidadJugador = sc.nextLine();
                         System.out.println("Ahora su puesto en el ranking: ");
-                        ranking_jugador = sc.nextInt();
+                        rankingJugador = sc.nextInt();
                         sc.nextLine();
-                        lista_jugadores.add(new Participante(nombre_jugador, nacionalidad_jugador, ranking_jugador));
+                        listaJugadores.add(new Participante(nombreJugador, nacionalidadJugador, rankingJugador));
                         i++;
                     }
 
@@ -73,14 +73,14 @@ public class Parcial2Eda {
                         System.out.println("Primero cree el troneo (opcion 1)");
                         break;
                     }
-                    if (lista_jugadores.size() < cant_jugadores) {
+                    if (listaJugadores.size() < cantJugadores) {
                         System.out.println("Faltan cargar jugadores: "
-                                + lista_jugadores.size() + " de " + cant_jugadores
+                                + listaJugadores.size() + " de " + cantJugadores
                                 + " ingresados (opcion 2)");
                         break;
                     }
-                    Collections.sort(lista_jugadores);  //ordenamos los jugadores por menor a mayor por ranking
-                    boolean crearRueda = torneo.armarPrimeraRueda(lista_jugadores);
+                    Collections.sort(listaJugadores);  //ordenamos los jugadores por menor a mayor por ranking
+                    boolean crearRueda = torneo.armarPrimeraRueda(listaJugadores);
                     if (crearRueda) {
                         torneo.mostrarPrimeraRonda();
                     }
@@ -94,8 +94,8 @@ public class Parcial2Eda {
                         Nodo partidoActual = partidos.get(j);
 
                         System.out.println("\nPartido " + (j + 1));
-                        System.out.println("1 - " + partidoActual.getParticipante1().getNombre_completo());
-                        System.out.println("2 - " + partidoActual.getParticipante2().getNombre_completo());
+                        System.out.println("1 - " + partidoActual.getParticipante1().getNombreCompleto());
+                        System.out.println("2 - " + partidoActual.getParticipante2().getNombreCompleto());
 
                         int opcGanador;
 
@@ -134,7 +134,7 @@ public class Parcial2Eda {
                         System.out.println("El torneo aun no ha finalizado");
                     } else {
                         System.out.println("\n=== CAMPEON DEL TORNEO ===");
-                        System.out.println("Nombre: " + campeon.getNombre_completo());
+                        System.out.println("Nombre: " + campeon.getNombreCompleto());
                         System.out.println("Nacionalidad: " + campeon.getNacionalidad());
                         System.out.println("Ranking: " + campeon.getRanking());
                     }

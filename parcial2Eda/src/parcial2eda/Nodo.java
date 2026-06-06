@@ -92,12 +92,12 @@ public class Nodo {
     @Override
     public String toString() {
         String p1 = (participante1 != null)
-                ? participante1.getNombre_completo() + " (rank " + participante1.getRanking() + ")"
+                ? participante1.getNombreCompleto() + " (rank " + participante1.getRanking() + ")"
                 : "";
         String p2 = (participante2 != null)
-                ? participante2.getNombre_completo() + " (rank " + participante2.getRanking() + ")"
+                ? participante2.getNombreCompleto() + " (rank " + participante2.getRanking() + ")"
                 : "";
-        String g = (ganador != null) ? "  =  Ganador: " + ganador.getNombre_completo() : "";
+        String g = (ganador != null) ? "  =  Ganador: " + ganador.getNombreCompleto() : "";
         return p1 + "  vs  " + p2 + g;
     }
 }

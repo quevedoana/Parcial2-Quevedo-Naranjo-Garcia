@@ -23,7 +23,7 @@ public class Arbol {
      * @return True si la cantidad de participantes es correcta, false si no lo
      * es
      */
-    public boolean cant_participantes(int participantes) {
+    public boolean cantParticipantes(int participantes) {
         if (participantes <= 3) {
             return false;
         }
@@ -41,7 +41,7 @@ public class Arbol {
      * @param participantes
      * @return Cantidad de etapas
      */
-    private int cant_etapas(int participantes) {
+    private int cantEtapas(int participantes) {
         int cont = 0;
         while (participantes > 1 && participantes % 2 == 0) {
             participantes = participantes / 2;
@@ -57,14 +57,14 @@ public class Arbol {
      * @param etapas Cantidad de etapas que va a tener el torneo
      * @return Partido creado
      */
-    private Nodo crear_torneo_recursivo(int etapas) {
+    private Nodo crearTorneoRecursivo(int etapas) {
         if (etapas == 0) {
             return null;
         }
         Nodo partido = new Nodo();
 
-        partido.setIzq(crear_torneo_recursivo(etapas - 1));
-        partido.setDer(crear_torneo_recursivo(etapas - 1));
+        partido.setIzq(crearTorneoRecursivo(etapas - 1));
+        partido.setDer(crearTorneoRecursivo(etapas - 1));
 
         return partido;
     }
@@ -74,9 +74,9 @@ public class Arbol {
      *
      * @param participantes Cantidad de participantes
      */
-    public void crear_torneo(int participantes) {
-        int etapas = this.cant_etapas(participantes);
-        this.raiz = crear_torneo_recursivo(etapas);
+    public void crearTorneo(int participantes) {
+        int etapas = this.cantEtapas(participantes);
+        this.raiz = crearTorneoRecursivo(etapas);
     }
 
     /*recorre el arbol y junta las hojas que son nodos sin hijos, 

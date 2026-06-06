@@ -6,22 +6,22 @@ package parcial2eda;
  */
 public class Participante implements Comparable<Participante>{
     
-    private String nombre_completo;
+    private String nombreCompleto;
     private String nacionalidad;
     private int ranking;
     
     public Participante(String nombre, String nacion, int rank) {
-        nombre_completo = nombre;
+        nombreCompleto = nombre;
         nacionalidad = nacion;
         ranking = rank;
     }
 
-    public String getNombre_completo() {
-        return nombre_completo;
+    public String getNombreCompleto() {
+        return nombreCompleto;
     }
 
-    public void setNombre_completo(String nombre_completo) {
-        this.nombre_completo = nombre_completo;
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
     }
 
     public String getNacionalidad() {
@@ -42,7 +42,7 @@ public class Participante implements Comparable<Participante>{
     
     @Override
     public String toString() {
-        return "Participante: " + "\nNombre: " + nombre_completo + "\nNacionalidad: " + nacionalidad + "\nRanking: " + ranking;
+        return "Participante: " + "\nNombre: " + nombreCompleto + "\nNacionalidad: " + nacionalidad + "\nRanking: " + ranking;
     }
     public int compareTo(Participante otro) {
         return Integer.compare(this.ranking, otro.ranking);
