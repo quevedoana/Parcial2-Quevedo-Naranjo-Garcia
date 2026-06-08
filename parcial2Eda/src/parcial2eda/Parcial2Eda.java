@@ -15,11 +15,9 @@ public class Parcial2Eda {
         Scanner sc = new Scanner(System.in);
         Arbol torneo = new Arbol();
         List<Participante> listaJugadores = new ArrayList<>();
-        Nodo partido = new Nodo();
 
         int cantJugadores = 0;
         String nombreJugador;
-        int rankingJugador;
         String nacionalidadJugador = null;
         boolean torneoCreado = false;
         int opcion;
@@ -32,7 +30,7 @@ public class Parcial2Eda {
             System.out.println("4. Cargar resultados de las fases");
             System.out.println("5. Mostrar resultados de las fases");
             System.out.println("6. Mostrar campeón");
-            System.out.println("6. Salir");
+            System.out.println("7. Salir");
             opcion = sc.nextInt();
             sc.nextLine();
             switch (opcion) {
@@ -49,8 +47,8 @@ public class Parcial2Eda {
                     break;
                 case 2:
                     int i = listaJugadores.size() + 1;
-                    if (cantJugadores == 0) {
-                        System.out.println("Tiene que indicar primero la cantidad de jugadores participantes del torneo");
+                    if (!torneoCreado ||cantJugadores == 0) {
+                        System.out.println("Tiene que indicar primero la cantidad de jugadores participantes del torneo (opcion 1)");
                         break;
                     }
                     while (i <= cantJugadores) {
@@ -59,9 +57,32 @@ public class Parcial2Eda {
                         nombreJugador = sc.nextLine();
                         System.out.println("Su nacionalidad: ");
                         nacionalidadJugador = sc.nextLine();
-                        System.out.println("Ahora su puesto en el ranking: ");
-                        rankingJugador = sc.nextInt();
-                        sc.nextLine();
+                        int rankingJugador = 0;
+                        boolean rankingValido = false;
+                        while (!rankingValido) {
+                            System.out.println("Su ranking: ");
+                            try {
+                                rankingJugador = Integer.parseInt(sc.nextLine().trim());
+                                if (rankingJugador <= 0) {
+                                    System.out.println("El ranking debe ser un numero positivo");
+                                    continue;
+                                }
+                                boolean repetido = false;
+                                for (Participante p : listaJugadores) {
+                                    if (p.getRanking() == rankingJugador) {
+                                        repetido = true;
+                                        break;
+                                    }
+                                }
+                                if (repetido) {
+                                    System.out.println("Ese ranking ya esta asignado a otro jugador. Ingrese otro:");
+                                } else {
+                                    rankingValido = true;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Ingrese un numero valido.");
+                            }
+                        }
                         listaJugadores.add(new Participante(nombreJugador, nacionalidadJugador, rankingJugador));
                         i++;
                     }
@@ -88,6 +109,10 @@ public class Parcial2Eda {
                 case 4:
 
                     List<Nodo> partidos = torneo.obtenerPartidosPendientes();
+                    if (partidos.isEmpty()) {
+                        System.out.println("El torneo ya finalizo o no empezo");
+                        break;
+                    }
 
                     for (int j = 0; j < partidos.size(); j++) {
 
@@ -103,22 +128,17 @@ public class Parcial2Eda {
                             System.out.print("Ingrese ganador (1 o 2): ");
                             opcGanador = sc.nextInt();
                         } while (opcGanador != 1 && opcGanador != 2);
-
+                        sc.nextLine();
                         torneo.cargarResultado(partidoActual, opcGanador);
                     }
 
                     torneo.siguienteFase();
 
                     System.out.println("Resultados cargados correctamente.");
-                    torneo.siguienteFase();
 
                     System.out.println("\nSIGUIENTE FASE");
                     torneo.mostrarSiguienteFase();
 
-                    if (partidos.isEmpty()) {
-                        System.out.println("El torneo ya finalizo");
-                        break;
-                    }
 
                     break;
                 case 5:
