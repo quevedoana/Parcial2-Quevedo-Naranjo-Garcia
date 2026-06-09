@@ -2,6 +2,7 @@ package parcial2eda;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -97,23 +98,23 @@ public class Arbol {
     /*armamos la primera rueda asoganandole jugadores a las hojas*/
     public boolean armarPrimeraRueda(List<Participante> jugadores) {
         if (raiz == null) {
-            System.out.println("El torneo no fue creado todavia");
+            JOptionPane.showMessageDialog(null,
+                    "El torneo no fue creado todavía");
             return false;
         }
 
-        //juntamos las hojas en orden
         List<Nodo> hojas = new ArrayList<>();
-        recolectarHojas(raiz, hojas);   //recorre el arbol en preorden
+        recolectarHojas(raiz, hojas);
 
         int n = jugadores.size();
         int mitad = n / 2;
 
         if (hojas.size() != mitad) {
-            System.out.println("El arbol no cincide con la cantidad de jugadores");
+            JOptionPane.showMessageDialog(null,
+                    "El árbol no coincide con la cantidad de jugadores");
             return false;
         }
 
-        //asignamos hoja[i] = jugador[i]  vs  jugador[mitad + i]
         for (int i = 0; i < mitad; i++) {
             hojas.get(i).setParticipante1(jugadores.get(i));
             hojas.get(i).setParticipante2(jugadores.get(mitad + i));
@@ -124,8 +125,10 @@ public class Arbol {
 
     /*muestra los cruces de la primera ronda*/
     public void mostrarPrimeraRonda() {
+
         if (raiz == null) {
-            System.out.println("El torneo no fue creado todavia.");
+            JOptionPane.showMessageDialog(null,
+                    "El torneo no fue creado todavía.");
             return;
         }
 
@@ -133,28 +136,31 @@ public class Arbol {
         recolectarHojas(raiz, hojas);
 
         boolean hayPartidos = false;
+
         for (Nodo h : hojas) {
             if (h.estaCompleto()) {
                 hayPartidos = true;
                 break;
             }
         }
+
         if (!hayPartidos) {
-            System.out.println("Todavia no se armo la ronda");
+            JOptionPane.showMessageDialog(null,
+                    "Todavía no se armó la ronda");
             return;
         }
 
-        System.out.println("          CRUCES");
         for (int i = 0; i < hojas.size(); i++) {
-            System.out.printf("  Partido %2d: %s%n", i + 1, hojas.get(i));
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Partido " + (i + 1) + "\n" + hojas.get(i)
+            );
         }
-        System.out.println();
     }
 
     public Nodo getRaiz() {
         return raiz;
     }
-
 
     private void siguienteFasePrivado(Nodo n) {
         if (n == null) {
@@ -188,6 +194,7 @@ public class Arbol {
     }
 
     private void mostrarResultadoPrivado(Nodo n) {
+
         if (n == null) {
             return;
         }
@@ -196,7 +203,7 @@ public class Arbol {
         mostrarResultadoPrivado(n.getDer());
 
         if (n.getGanador() != null) {
-            System.out.println(n);
+            JOptionPane.showMessageDialog(null, n);
         }
     }
 
@@ -215,7 +222,7 @@ public class Arbol {
                 && n.getParticipante2() != null
                 && n.getGanador() == null) {
 
-            System.out.println(n);
+            JOptionPane.showMessageDialog(null, n);
         }
 
         mostrarSiguienteFasePrivado(n.getIzq());
